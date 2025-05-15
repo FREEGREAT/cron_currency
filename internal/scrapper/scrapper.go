@@ -29,8 +29,6 @@ func ScrappUrl(url, domain string) (float64, error) {
 		}
 	})
 
-	url = fmt.Sprintf("https://www.x-rates.com/calculator/?from=%s&to=%s&amount=1", "USD", "EUR")
-
 	err := c.Visit(url)
 	if err != nil {
 		log.Fatalf("Error visiting base url: %v", err)
