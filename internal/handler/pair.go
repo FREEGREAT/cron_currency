@@ -6,20 +6,18 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"scrapper.go/internal/model"
-	"scrapper.go/internal/storage"
+	"scrapper.go/internal/service"
 )
 
 const ()
 
 type handler struct {
-	currency storage.CurrencyStorage
-	pairs    storage.PairStorage
+	storageService service.StorageService
 }
 
-func NewHandler(curr storage.CurrencyStorage, pairs storage.PairStorage) *handler {
+func NewHandler(service service.StorageService) *handler {
 	return &handler{
-		currency: curr,
-		pairs:    pairs,
+		storageService: service,
 	}
 }
 
@@ -37,7 +35,7 @@ func (h *handler) AddPairHandler(w http.ResponseWriter, r *http.Request, _ httpr
 		return
 	}
 
-	if err := h.pairs.AddPair(r.Context(), pair.Base, pair.Quote); err != nil {
+	if err := h.storageService.AddPair(r.Context(), pair.Base, pair.Quote); err != nil {
 		http.Error(w, "Failed to add pair", http.StatusInternalServerError)
 		return
 	}
@@ -53,12 +51,12 @@ func (h *handler) GetRatesHandler(w http.ResponseWriter, r *http.Request, _ http
 		return
 	}
 
-	pairID, err := h.pairs.GetPairID(r.Context(), pair)
+	pairID, err := h.storageService.GetPairID(r.Context(), pair)
 	if err != nil {
 		http.Error(w, "Failed to get pairs:", http.StatusInternalServerError)
 	}
 
-	rates, err := h.currency.GetLatestRates(r.Context(), pairID)
+	rates, err := h.storageService.GetLatestRates(r.Context(), pairID)
 	if err != nil {
 		http.Error(w, "Failed to get rates", http.StatusInternalServerError)
 		return

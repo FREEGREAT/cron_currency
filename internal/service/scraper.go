@@ -11,7 +11,13 @@ const (
 	zeroVal = 0
 )
 
-func FetchRate(base, quote string) (float64, error) {
+type scrapService struct{}
+
+func NewScrapService() ScrapService {
+	return &scrapService{}
+}
+
+func (s *scrapService) FetchRate(base, quote string) (float64, error) {
 	url := fmt.Sprintf("https://www.x-rates.com/calculator/?from=%s&to=%s&amount=1", base, quote)
 
 	fmt.Printf("Base %s, Quote %s", base, quote)

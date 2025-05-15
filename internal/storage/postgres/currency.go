@@ -6,14 +6,14 @@ import (
 
 	"scrapper.go/internal/model"
 	"scrapper.go/internal/storage"
-	postgresql "scrapper.go/pkg/db"
+	postgreConnect "scrapper.go/pkg/postgreSQL"
 )
 
 type currencyStorage struct {
-	client postgresql.Client
+	client postgreConnect.Client
 }
 
-func NewCurrencyRepository(client postgresql.Client) storage.CurrencyStorage {
+func NewCurrencyRepository(client postgreConnect.Client) storage.CurrencyStorage {
 	return &currencyStorage{
 		client: client,
 	}

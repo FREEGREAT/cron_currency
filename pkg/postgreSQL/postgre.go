@@ -1,4 +1,4 @@
-package dbC
+package postgreConnect
 
 import (
 	"context"

@@ -5,14 +5,14 @@ import (
 
 	"scrapper.go/internal/model"
 	"scrapper.go/internal/storage"
-	postgresql "scrapper.go/pkg/db"
+	postgreConnect "scrapper.go/pkg/postgreSQL"
 )
 
 type pairStorage struct {
-	client postgresql.Client
+	client postgreConnect.Client
 }
 
-func NewPairRepository(client postgresql.Client) storage.PairStorage {
+func NewPairRepository(client postgreConnect.Client) storage.PairStorage {
 	return &pairStorage{
 		client: client,
 	}
