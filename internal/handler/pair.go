@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"scrapper.go/internal/model"
+	model "scrapper.go/internal/models"
 	"scrapper.go/internal/service"
 )
 

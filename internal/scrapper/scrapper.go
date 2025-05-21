@@ -21,7 +21,7 @@ func ScrappUrl(url, domain string) (float64, error) {
 	)
 
 	c.OnHTML("span.ccOutputRslt", func(e *colly.HTMLElement) {
-		text := e.DOM.Clone().Children().Remove().End().Text() // тільки основне число
+		text := e.DOM.Clone().Children().Remove().End().Text()
 		if text != "" {
 			mu.Lock()
 			resultt = text

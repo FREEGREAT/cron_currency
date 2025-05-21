@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"scrapper.go/internal/model"
+	model "scrapper.go/internal/models"
 	"scrapper.go/internal/storage"
 )
 
